@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #22252c;
+
+}
+
+/* LAYOUT */
+.main-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+
+.header-content {
+  background-color: #5970c1;
+  background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+  border-radius: 36px;
+  margin: 1rem 0.5rem 0.5rem 0;
+  line-height: 70px;
+  height: 70px;
+}
+
+.logo {
+  margin-left: 123px;
+}
+
+ul li:last-child {
+  margin-right: 247px;
+  margin-left: 63px;
+}
+
+
+
+
+/* Main */
+canvas {
+  background-color: rgb(180, 106, 106);
+}
+
+/* HELPERS */
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.flex.column {
+  flex-direction: column;
+}

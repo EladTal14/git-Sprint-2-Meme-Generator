@@ -5,14 +5,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meme Generator</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
+<body onload="init()">
+  <header class="header-container">
 
+    <div class="header-content flex space-between">
+      <div class="logo">LOGO</div>
+      <ul class="clean-list flex">
+        <li>
+          <a href="#" onclick="openGallery()">Gallery</a>
+        </li>
+        <li>
+          <a href="#">About</a>
+        </li>
+      </ul>
+    </div>
 
+  </header>
 
-  <script src="js/service-meme.js"></script>
+  <main>
+    <div class="main-container">
+      <div class="working-space">
+        <div class="canvas-container">
+          <!-- onclick should be on images not here -->
+          <canvas id="my-canvas" height="500" width="500"></canvas>
+        </div>
+        <div class="controller-content">
+          <input type="text" placeholder="Enter Text" class="text" onchange="drawText(this.value)">
+          <div class="line-buttons">
+            <button>updown</button>
+            <button>+</button>
+            <button>trash</button>
+          </div>
+
+          <div class="change-apperance-buttons">
+            <button>A+</button>
+            <button>A-</button>
+            <button>align-left</button>
+            <button>align-center</button>
+            <button>align-right</button>
+
+            <select name="" id="fontChange">
+              <option value="impact">Impact</option>
+              <option value="Lato">Lato</option>
+            </select>
+
+            <button>S</button>
+            <button>choose color</button>
+          </div>
+
+          <div class="choose-stickers">
+            <button>hap-face</button>
+            <button>sad-face</button>
+          </div>
+
+          <div class="actions">
+            <button>Share</button>
+            <button>Download</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery" hidden>
+        <nav>
+          <input type="text" name="" oninput="onSetFilter(this.value)" id="filter" placeholder="Search">
+          <div class="key-words">
+            <button>Funny</button>
+            <button>Men</button>
+            <button>Women</button>
+          </div>
+          <div class="gallery-main grid">
+
+          </div>
+        </nav>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="js/meme-service.js"></script>
   <script src="js/main.js"></script>
 </body>
 
