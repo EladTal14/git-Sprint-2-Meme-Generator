@@ -1,5 +1,11 @@
 * {
   box-sizing: border-box;
+
+}
+
+@font-face {
+  font-family: impactl;
+  src: url(../fonts/impact.ttf);
 }
 
 body {
@@ -43,6 +49,10 @@ canvas {
 }
 
 /* HELPERS */
+.grid {
+  display: grid;
+}
+
 .flex {
   display: flex;
 }
@@ -59,4 +69,17 @@ canvas {
 
 .flex.column {
   flex-direction: column;
+}
+
+.gallery-main {
+  width: 80vw;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.gallery-main img {
+  width: 100%;
 }

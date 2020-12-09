@@ -28,13 +28,14 @@
 
   <main>
     <div class="main-container">
-      <div class="working-space">
+      <div class="working-space" hidden>
         <div class="canvas-container">
-          <!-- onclick should be on images not here -->
           <canvas id="my-canvas" height="500" width="500"></canvas>
         </div>
         <div class="controller-content">
-          <input type="text" placeholder="Enter Text" class="text" onchange="drawText(this.value)">
+
+          <input type="text" placeholder="Enter Text" value="enter text1" class="text">
+          <!-- oninput="drawText(this.value)" -->
           <div class="line-buttons">
             <button>updown</button>
             <button>+</button>
@@ -69,16 +70,23 @@
         </div>
       </div>
 
-      <div class="gallery" hidden>
+      <div class="gallery">
         <nav>
-          <input type="text" name="" oninput="onSetFilter(this.value)" id="filter" placeholder="Search">
+          <input list="filter" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search">
+          <datalist id="filter">
+            <option value="Internet Explorer">
+            <option value="Firefox">
+            <option value="Google Chrome">
+            <option value="Opera">
+            <option value="Safari">
+          </datalist>
+
           <div class="key-words">
             <button>Funny</button>
             <button>Men</button>
             <button>Women</button>
           </div>
           <div class="gallery-main grid">
-
           </div>
         </nav>
 
