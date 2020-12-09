@@ -34,20 +34,20 @@
         </div>
         <div class="controller-content">
 
-          <input type="text" placeholder="Enter Text" value="enter text1" class="text">
+          <input type="text" placeholder="Enter Text" value="" class="text">
           <!-- oninput="drawText(this.value)" -->
           <div class="line-buttons">
             <button>updown</button>
-            <button>+</button>
+            <button onclick="addLine()">+</button>
             <button>trash</button>
           </div>
 
           <div class="change-apperance-buttons">
-            <button>A+</button>
-            <button>A-</button>
-            <button>align-left</button>
-            <button>align-center</button>
-            <button>align-right</button>
+            <button onclick="changeFontSize('+')">A+</button>
+            <button onclick="changeFontSize('-')">A-</button>
+            <button onclick="changeAlign('right')">align-left</button>
+            <button onclick="changeAlign('center')">align-center</button>
+            <button onclick="changeAlign('left')">align-right</button>
 
             <select name="" id="fontChange">
               <option value="impact">Impact</option>
@@ -55,7 +55,8 @@
             </select>
 
             <button>S</button>
-            <button>choose color</button>
+            <input type="color" value="#ffffff" onchange="changeColor(this.value)">
+
           </div>
 
           <div class="choose-stickers">
@@ -72,7 +73,8 @@
 
       <div class="gallery">
         <nav>
-          <input list="filter" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search">
+          <input list="filter" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search"
+            autofocus>
           <datalist id="filter">
             <option value="Internet Explorer">
             <option value="Firefox">
@@ -86,7 +88,9 @@
             <button>Men</button>
             <button>Women</button>
           </div>
-          <div class="gallery-main grid">
+          <div class="gallery-container">
+            <div class="gallery-main grid">
+            </div>
           </div>
         </nav>
 

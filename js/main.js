@@ -6,21 +6,11 @@ var gImg
 function init() {
   gCanvas = document.querySelector('#my-canvas');
   gCtx = gCanvas.getContext('2d');
-  onSetFilter()
-
+  onSetFilter();
+  addEventsToInput();
+  resetGctx();
+  _createMeme();
 }
-
-
-
-// function drawText(text, x = 100, y = 100) {
-//   if (!text) updateTxtMeme('')
-//   gCtx.strokeStyle = 'red';
-//   gCtx.font = 'small-caps 700 40px impact';
-//   gCtx.textAlign = 'center';
-//   gCtx.fillText(text, x, y);
-//   gCtx.strokeText(text, x, y);
-// }
-
 
 
 function onSetFilter(filterBy) {
@@ -42,7 +32,8 @@ function openGallery() {
   workSpace.hidden = true;
   var gallery = document.querySelector('.gallery');
   gallery.hidden = false;
-  renderPictures()
+  renderPictures();
+  resetGctx();
 }
 
 function openWorkSpace() {
@@ -54,62 +45,46 @@ function openWorkSpace() {
 
 
 function drawImg(id) {
-  openWorkSpace()
+  openWorkSpace();
   var text = document.querySelector('.text');
   text.value = ''
   var imgFromBack = getImg(id);
   var img = new Image();
   img.src = imgFromBack.url;
-  var meme = getMeme();
   gImg = img
-  // console.log(img);
   gImg.onload = () => {
     drawMeme()
-
-    // gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
-    // drawText(meme.lines[0].txt, 250, 100);
-    // drawText(meme.lines[1].txt, 250, 400);
   }
 
 }
 
 function addEventsToInput() {
-  var topText = document.querySelector('.text')
-  topText.addEventListener('keydown', drawMeme)
-  topText.addEventListener('keyup', drawMeme)
-  topText.addEventListener('change', drawMeme)
+  var text = document.querySelector('.text')
+  text.addEventListener('keydown', drawMeme)
+  text.addEventListener('keyup', drawMeme)
+  text.addEventListener('change', drawMeme)
 }
 
 function drawMeme() {
-  addEventsToInput()
+  var fontFamily = document.querySelector('#fontChange').value
   gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
-
   gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height);
-
   gCtx.lineWidth = 4;
-  gCtx.font = '40px impact';
+  gCtx.font = `${fontFamily} `;
   gCtx.strokeStyle = 'black';
-  gCtx.fillStyle = 'white';
-  gCtx.textAlign = 'center';
   gCtx.textBaseline = 'top';
-
   var text = document.querySelector('.text').value;
   text = text.toUpperCase();
   var x = gCanvas.width / 2;
-  var y = 0;
-  wrapText(gCtx, text, x, y, 300, 28, false);
-  // ctx.textBaseline = 'bottom';
-  // var text2 = document.getElementById('bottom-text').value;
-  // text2 = text2.toUpperCase();
-  // y = memeSize;
-
+  var y = 50;
+  wrapText(gCtx, text, x, y, 28);
 }
 
-function wrapText(context, text, x, y, maxWidth, lineHeight, fromBottom) {
+function wrapText(context, text, x, y, lineHeight, fromBottom) {
 
-  var pushMethod = (fromBottom) ? 'unshift' : 'push';
-
-  lineHeight = (fromBottom) ? -lineHeight : lineHeight;
+  // var pushMethod = (fromBottom) ? 'unshift' : 'push';
+  var pushMethod = 'push'
+  // lineHeight = (fromBottom) ? -lineHeight : lineHeight;
 
   var lines = [];
   var y = y;
@@ -121,7 +96,7 @@ function wrapText(context, text, x, y, maxWidth, lineHeight, fromBottom) {
     var metrics = context.measureText(testLine);
     var testWidth = metrics.width;
 
-    if (testWidth > maxWidth) {
+    if (testWidth > gCanvas.width - 30) {
       lines[pushMethod](line);
       line = words[n] + ' ';
     } else {
@@ -134,6 +109,53 @@ function wrapText(context, text, x, y, maxWidth, lineHeight, fromBottom) {
     context.strokeText(lines[k], x, y + lineHeight * k);
     context.fillText(lines[k], x, y + lineHeight * k);
   }
+}
 
+function addLine() {
+  var text = document.querySelector('.text').value
+  addMemeLine(text, getFontSize(), gCtx.textAlign, gCtx.strokeStyle)
+  var meme = getMeme()
+  if (meme.lines[0]) {
+    console.log(1);
+  }
+}
 
+// to util
+function getFontSize() {
+  var digitReg = /([0-9])\d?/g;
+  var res = (gCtx.font).toString().match(digitReg);
+  return +res
+}
+
+function changeColor(val) {
+  gCtx.fillStyle = `${val}`
+  drawMeme()
+}
+
+function changeFontSize(op) {
+  var addToFontSize = 2;
+  var res = getFontSize()
+  if (op === '+') {
+    gCtx.font = `${res+addToFontSize}px impact`;
+    drawMeme();
+  } else {
+    if (res === 0) return
+    drawMeme();
+    gCtx.font = `${res-addToFontSize}px impact`;
+  }
+}
+
+function changeAlign(val) {
+  gCtx.textAlign = `${val}`;
+  drawMeme()
+}
+
+function resetGctx() {
+  gCtx.font = '20px impact'
+  gCtx.textAlign = 'center'
+  gCtx.lineWidth = 4;
+  gCtx.strokeStyle = 'black';
+  gCtx.fillStyle = 'white';
+  gCtx.textBaseline = 'top';
+  _createMeme()
 }

@@ -71,13 +71,19 @@ canvas {
   flex-direction: column;
 }
 
-.gallery-main {
+.gallery-container {
   width: 80vw;
+  margin: 0 auto;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.gallery-main {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 10px;
-  margin: 0 auto;
   margin-top: 10px;
+
 }
 
 .gallery-main img {

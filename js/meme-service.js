@@ -36,19 +36,50 @@ var gImgs = [{
   id: 8,
   url: 'images/8.jpg',
   keywords: ['alone', 'sad']
+}, {
+  id: 9,
+  url: 'images/9.jpg',
+  keywords: ['happy', 'funny', 'man']
+}, {
+  id: 10,
+  url: 'images/10.jpg',
+  keywords: ['alone', 'sad']
+}, {
+  id: 11,
+  url: 'images/11.jpg',
+  keywords: ['happy', 'funny', 'man']
+}, {
+  id: 12,
+  url: 'images/12.jpg',
+  keywords: ['alone', 'sad']
+}, {
+  id: 13,
+  url: 'images/13.jpg',
+  keywords: ['happy', 'funny', 'man']
+}, {
+  id: 14,
+  url: 'images/14.jpg',
+  keywords: ['alone', 'sad']
+}, {
+  id: 15,
+  url: 'images/15.jpg',
+  keywords: ['happy', 'funny', 'man']
+}, {
+  id: 16,
+  url: 'images/16.jpg',
+  keywords: ['alone', 'sad']
 }];
 
-var gMeme = {
-  selectedImgId: 0,
-  selectedLineIdx: 0,
-  lines: [{
-      txt: 'enter text'
-    },
-    {
-      txt: 'enter text',
-    }
-  ]
-};
+var gMeme
+
+function _createMeme() {
+  gMeme = {
+    selectedImgId: 0,
+    selectedLineIdx: 0,
+    lines: []
+  };
+}
+
 
 function updateTxtMeme(text) {
   gMeme.lines[gMeme.selectedLineIdx].txt = text
@@ -82,4 +113,13 @@ function getImgsforDisplay() {
 
   return images;
 
+}
+
+function addMemeLine(txt, size, align, color) {
+  gMeme.lines.push({
+    txt,
+    size,
+    align,
+    color
+  })
 }
