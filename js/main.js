@@ -29,7 +29,7 @@ function renderPictures() {
 
 function openGallery() {
   var workSpace = document.querySelector('.working-space');
-  workSpace.hidden = true;
+  workSpace.classList.remove('flex');
   var gallery = document.querySelector('.gallery');
   gallery.hidden = false;
   renderPictures();
@@ -38,7 +38,7 @@ function openGallery() {
 
 function openWorkSpace() {
   var workSpace = document.querySelector('.working-space');
-  workSpace.hidden = false;
+  workSpace.classList.add('flex');
   var gallery = document.querySelector('.gallery');
   gallery.hidden = true;
 }

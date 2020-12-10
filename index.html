@@ -13,7 +13,7 @@
   <header class="header-container">
 
     <div class="header-content flex space-between">
-      <div class="logo">LOGO</div>
+      <div class="logo"><img src="images/LOGO.png"></div>
       <ul class="clean-list flex">
         <li>
           <a href="#" onclick="openGallery()">Gallery</a>
@@ -28,7 +28,7 @@
 
   <main>
     <div class="main-container">
-      <div class="working-space" hidden>
+      <div class="working-space space-between">
         <div class="canvas-container">
           <canvas id="my-canvas" height="500" width="500"></canvas>
         </div>
@@ -73,16 +73,16 @@
 
       <div class="gallery">
         <nav>
-          <input list="filter" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search"
+          <input list="filters" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search"
             autofocus>
-          <datalist id="filter">
-            <option value="Internet Explorer">
-            <option value="Firefox">
-            <option value="Google Chrome">
-            <option value="Opera">
-            <option value="Safari">
+          <datalist id="filters">
+            <option value="sad">
+            <option value="happy">
+            <option value="funny">
+            <option value="angry">
+            <option value="smart">
           </datalist>
-
+          <input type="submit">
           <div class="key-words">
             <button>Funny</button>
             <button>Men</button>
