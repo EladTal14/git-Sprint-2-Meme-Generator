@@ -76,7 +76,12 @@ function _createMeme() {
   gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
-    lines: []
+    lines: [{
+      position: {
+        x: gCanvas.width / 2,
+        y: 30
+      }
+    }]
   };
 }
 
@@ -115,11 +120,39 @@ function getImgsforDisplay() {
 
 }
 
+function changeLineProp(txt, size, align, color) {
+  gMeme.lines[gMeme.selectedLineIdx].txt = txt
+  gMeme.lines[gMeme.selectedLineIdx].size = size
+  gMeme.lines[gMeme.selectedLineIdx].align = align
+  gMeme.lines[gMeme.selectedLineIdx].color = color
+
+
+}
+
 function addMemeLine(txt, size, align, color) {
-  gMeme.lines.push({
-    txt,
-    size,
-    align,
-    color
-  })
+  gMeme.selectedLineIdx++
+  if (gMeme.lines.length === 1) {
+    gMeme.lines.push({
+      txt,
+      size,
+      align,
+      color,
+      position: {
+        x: gCanvas.width / 2,
+        y: gCanvas.height - 50
+      }
+    })
+  } else {
+    gMeme.lines.push({
+      txt,
+      size,
+      align,
+      color,
+      position: {
+        x: gCanvas.width / 2,
+        y: gCanvas.height / 2
+      }
+    })
+  }
+
 }

@@ -65,19 +65,23 @@ function addEventsToInput() {
   text.addEventListener('change', drawMeme)
 }
 
+function getCanvas() {
+  return gCanvas
+}
+
 function drawMeme() {
   var fontFamily = document.querySelector('#fontChange').value
   gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
   gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height);
-  gCtx.lineWidth = 4;
-  gCtx.font = `${fontFamily} `;
   gCtx.strokeStyle = 'black';
   gCtx.textBaseline = 'top';
   var text = document.querySelector('.text').value;
+  changeLineProp(text, getFontSize(), gCtx.textAlign, gCtx.fillStyle);
+  var meme = getMeme()
   text = text.toUpperCase();
-  var x = gCanvas.width / 2;
-  var y = 50;
-  wrapText(gCtx, text, x, y, 28);
+  for (var line in meme.lines) {
+    wrapText(gCtx, meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, getFontSize());
+  }
 }
 
 function wrapText(context, text, x, y, lineHeight, fromBottom) {
@@ -103,7 +107,7 @@ function wrapText(context, text, x, y, lineHeight, fromBottom) {
       line = testLine;
     }
   }
-  lines[pushMethod](line);
+  lines.push(line);
 
   for (var k in lines) {
     context.strokeText(lines[k], x, y + lineHeight * k);
@@ -114,10 +118,7 @@ function wrapText(context, text, x, y, lineHeight, fromBottom) {
 function addLine() {
   var text = document.querySelector('.text').value
   addMemeLine(text, getFontSize(), gCtx.textAlign, gCtx.strokeStyle)
-  var meme = getMeme()
-  if (meme.lines[0]) {
-    console.log(1);
-  }
+  document.querySelector('.text').value = ''
 }
 
 // to util
@@ -158,4 +159,13 @@ function resetGctx() {
   gCtx.fillStyle = 'white';
   gCtx.textBaseline = 'top';
   _createMeme()
+}
+
+
+function pressCanvas(ev) {
+  var {
+    offsetX,
+    offsetY
+  } = ev
+  console.log(offsetX, offsetY);
 }
