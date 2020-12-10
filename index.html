@@ -30,34 +30,34 @@
     <div class="main-container">
       <div class="working-space space-between">
         <div class="canvas-container">
-          <canvas id="my-canvas" height="500" width="500" onclick="pressCanvas(event)"></canvas>
+          <canvas id="my-canvas" height="400" width="400" onclick="pressCanvas(event)"></canvas>
         </div>
-        <div class="controller-content">
+        <div class="controller-content flex space-between">
 
           <input type="text" placeholder="Enter Text" value="" class="text">
           <!-- oninput="drawText(this.value)" -->
           <div class="line-buttons">
-            <button onclick="onChangeLines()">updown</button>
-            <button onclick="addLine()">+</button>
-            <button>trash</button>
+            <button onclick="onChangeLines()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
+                alt="" /></button>
+            <button onclick="addLine()"><img src="icons/add.png" alt="" /></button>
+            <button><img src="icons/trash.png" alt="" /></button>
           </div>
 
-          <div class="change-apperance-buttons">
-            <button onclick="changeFontSize('+')">A+</button>
-            <button onclick="changeFontSize('-')">A-</button>
-            <button onclick="changeAlign('right')">align-left</button>
-            <button onclick="changeAlign('center')">align-center</button>
-            <button onclick="changeAlign('left')">align-right</button>
+          <div class="change-apperance-buttons grid">
+            <button onclick="changeFontSize('+')"><img src="icons/increase-font-icon.png" alt="" /></button>
+            <button onclick="changeFontSize('-')"><img src="icons/decrease-font-icon.png" alt="" /></button>
+            <button onclick="changeAlign('right')"><img src="icons/align-to-left.png" alt="" /></button>
+            <button onclick="changeAlign('center')"><img src="icons/center-text-alignment.png" alt="" /></button>
+            <button onclick="changeAlign('left')"><img src="icons/align-to-right.png" alt="" /></button>
 
-            <select name="" id="fontChange" onchange="changeFontFamily(this.value)">
+            <select name="" class="btn-font-change" id="fontChange" onchange="changeFontFamily(this.value)">
               <option value="impact">Impact</option>
-              <option value="sans-serif">sans serif</option>
+              <option value="sans-serif">Sans Serif</option>
             </select>
 
             <button>S</button>
-            <input type="color" value="#ffffff" onchange="changeColor(this.value)">
-
-          </div>
+            <button type="color"><img src="icons/paint-board-and-brush.png" alt="" /><input type="color" value="#ffffff"
+                onchange="changeColor(this.value)"></div>
 
           <div class="choose-stickers">
             <button>hap-face</button>
@@ -69,32 +69,35 @@
             <button>Download</button>
           </div>
         </div>
-      </div>
 
-      <div class="gallery">
-        <nav>
-          <input list="filters" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search"
-            autofocus>
-          <datalist id="filters">
-            <option value="sad">
-            <option value="happy">
-            <option value="funny">
-            <option value="angry">
-            <option value="smart">
-          </datalist>
-          <input type="submit">
-          <div class="key-words">
-            <button>Funny</button>
-            <button>Men</button>
-            <button>Women</button>
-          </div>
-          <div class="gallery-container">
-            <div class="gallery-main grid">
-            </div>
-          </div>
-        </nav>
 
       </div>
+    </div>
+
+    <div class="gallery">
+      <nav>
+        <input list="filters" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search"
+          autofocus>
+        <datalist id="filters">
+          <option value="sad">
+          <option value="happy">
+          <option value="funny">
+          <option value="angry">
+          <option value="smart">
+        </datalist>
+        <div class="key-words">
+          <button>Funny</button>
+          <button>Men</button>
+          <button>Women</button>
+        </div>
+        <button>more</button>
+        <div class="gallery-container">
+          <div class="gallery-main grid">
+          </div>
+        </div>
+      </nav>
+
+    </div>
     </div>
   </main>
 

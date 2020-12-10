@@ -80,11 +80,14 @@ function drawMeme() {
   var meme = getMeme()
   for (var line in meme.lines) {
     // console.log(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size);
-    wrapText(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size);
+    wrapText(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size, meme.lines[line].color, meme.lines[line].align);
   }
 }
 
-function wrapText(text, x, y, lineHeight) {
+function wrapText(text, x, y, fontSize, fontColor, txtAlign, lineHeight = 20) {
+  gCtx.font = `${fontSize}px impact`
+  gCtx.fillStyle = fontColor
+  gCtx.textAlign = txtAlign
   var lines = [];
   var y = y;
   var line = '';
@@ -128,7 +131,6 @@ function getFontFamily() {
   var digitReg = /( )\w+/g;
   var res = (gCtx.font).toString().match(digitReg);
   var res = res.join(' ')
-  console.log(res);
   return res
 }
 
