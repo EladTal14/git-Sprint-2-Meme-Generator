@@ -12,6 +12,9 @@ function init() {
   _createMeme();
 }
 
+function getCanvas() {
+  return gCanvas
+}
 
 function onSetFilter(filterBy) {
   setFilter(filterBy);
@@ -65,31 +68,23 @@ function addEventsToInput() {
   text.addEventListener('change', drawMeme)
 }
 
-function getCanvas() {
-  return gCanvas
-}
 
 function drawMeme() {
-  var fontFamily = document.querySelector('#fontChange').value
+
   gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
   gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height);
-  gCtx.strokeStyle = 'black';
-  gCtx.textBaseline = 'top';
+
   var text = document.querySelector('.text').value;
+  text = text.toUpperCase();
   changeLineProp(text, getFontSize(), gCtx.textAlign, gCtx.fillStyle);
   var meme = getMeme()
-  text = text.toUpperCase();
   for (var line in meme.lines) {
-    wrapText(gCtx, meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, getFontSize());
+    // console.log(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size);
+    wrapText(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size);
   }
 }
 
-function wrapText(context, text, x, y, lineHeight, fromBottom) {
-
-  // var pushMethod = (fromBottom) ? 'unshift' : 'push';
-  var pushMethod = 'push'
-  // lineHeight = (fromBottom) ? -lineHeight : lineHeight;
-
+function wrapText(text, x, y, lineHeight) {
   var lines = [];
   var y = y;
   var line = '';
@@ -97,21 +92,22 @@ function wrapText(context, text, x, y, lineHeight, fromBottom) {
 
   for (var n = 0; n < words.length; n++) {
     var testLine = line + ' ' + words[n];
-    var metrics = context.measureText(testLine);
+    var metrics = gCtx.measureText(testLine);
+    // console.log(metrics);
     var testWidth = metrics.width;
 
     if (testWidth > gCanvas.width - 30) {
-      lines[pushMethod](line);
+      lines.push(line);
       line = words[n] + ' ';
     } else {
       line = testLine;
     }
   }
   lines.push(line);
-
+  // console.log(lines);
   for (var k in lines) {
-    context.strokeText(lines[k], x, y + lineHeight * k);
-    context.fillText(lines[k], x, y + lineHeight * k);
+    gCtx.strokeText(lines[k], x, y + lineHeight * k);
+    gCtx.fillText(lines[k], x, y + lineHeight * k);
   }
 }
 
@@ -128,6 +124,14 @@ function getFontSize() {
   return +res
 }
 
+function getFontFamily() {
+  var digitReg = /( )\w+/g;
+  var res = (gCtx.font).toString().match(digitReg);
+  var res = res.join(' ')
+  console.log(res);
+  return res
+}
+
 function changeColor(val) {
   gCtx.fillStyle = `${val}`
   drawMeme()
@@ -135,15 +139,22 @@ function changeColor(val) {
 
 function changeFontSize(op) {
   var addToFontSize = 2;
-  var res = getFontSize()
+  var fontSize = getFontSize();
+  var fontFamily = getFontFamily()
+  if (fontSize === 0) return;
   if (op === '+') {
-    gCtx.font = `${res+addToFontSize}px impact`;
+    gCtx.font = `${fontSize+addToFontSize}px ${fontFamily}`;
     drawMeme();
   } else {
-    if (res === 0) return
     drawMeme();
-    gCtx.font = `${res-addToFontSize}px impact`;
+    gCtx.font = `${fontSize-addToFontSize}px ${fontFamily}`;
   }
+}
+
+function changeFontFamily(val) {
+  console.log(val);
+  gCtx.font = `${getFontSize()}px ${val}`
+  drawMeme();
 }
 
 function changeAlign(val) {
@@ -158,6 +169,8 @@ function resetGctx() {
   gCtx.strokeStyle = 'black';
   gCtx.fillStyle = 'white';
   gCtx.textBaseline = 'top';
+  gCtx.strokeStyle = 'black';
+  gCtx.textBaseline = 'top';
   _createMeme()
 }
 
@@ -168,4 +181,10 @@ function pressCanvas(ev) {
     offsetY
   } = ev
   console.log(offsetX, offsetY);
+}
+
+function onChangeLines() {
+  changeLines()
+  document.querySelector('.text').value = '';
+
 }

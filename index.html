@@ -37,7 +37,7 @@
           <input type="text" placeholder="Enter Text" value="" class="text">
           <!-- oninput="drawText(this.value)" -->
           <div class="line-buttons">
-            <button>updown</button>
+            <button onclick="onChangeLines()">updown</button>
             <button onclick="addLine()">+</button>
             <button>trash</button>
           </div>
@@ -49,9 +49,9 @@
             <button onclick="changeAlign('center')">align-center</button>
             <button onclick="changeAlign('left')">align-right</button>
 
-            <select name="" id="fontChange">
+            <select name="" id="fontChange" onchange="changeFontFamily(this.value)">
               <option value="impact">Impact</option>
-              <option value="Lato">Lato</option>
+              <option value="sans-serif">sans serif</option>
             </select>
 
             <button>S</button>

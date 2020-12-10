@@ -70,15 +70,16 @@ var gImgs = [{
   keywords: ['alone', 'sad']
 }];
 
-var gMeme
+var gMeme;
 
 function _createMeme() {
+  var canvas = getCanvas()
   gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [{
       position: {
-        x: gCanvas.width / 2,
+        x: canvas.width / 2,
         y: 30
       }
     }]
@@ -130,7 +131,8 @@ function changeLineProp(txt, size, align, color) {
 }
 
 function addMemeLine(txt, size, align, color) {
-  gMeme.selectedLineIdx++
+  var canvas = getCanvas()
+  gMeme.selectedLineIdx = gMeme.lines.length
   if (gMeme.lines.length === 1) {
     gMeme.lines.push({
       txt,
@@ -138,8 +140,8 @@ function addMemeLine(txt, size, align, color) {
       align,
       color,
       position: {
-        x: gCanvas.width / 2,
-        y: gCanvas.height - 50
+        x: canvas.width / 2,
+        y: canvas.height - 50
       }
     })
   } else {
@@ -149,10 +151,20 @@ function addMemeLine(txt, size, align, color) {
       align,
       color,
       position: {
-        x: gCanvas.width / 2,
-        y: gCanvas.height / 2
+        x: canvas.width / 2,
+        y: canvas.height / 2
       }
     })
   }
 
+}
+
+function changeLines() {
+  var num
+  if (gMeme.selectedLineIdx === gMeme.lines.length - 1) {
+    gMeme.selectedLineIdx = 0
+  } else if (gMeme.selectedLineIdx >= 0) {
+    num = 1
+    gMeme.selectedLineIdx += num
+  }
 }
