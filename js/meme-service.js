@@ -130,6 +130,7 @@ function changeLineProp(txt, size, align, color) {
 
 }
 
+
 function addMemeLine(txt, size, align, color) {
   var canvas = getCanvas()
   gMeme.selectedLineIdx = gMeme.lines.length
@@ -177,7 +178,9 @@ function clickedOnLine(lineClicked) {
 
 function removeLine() {
 
-  gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-  if (!gMeme.selectedLineIdx) return gMeme.selectedLineIdx = 0
-  gMeme.selectedLineIdx--
+  if (gMeme.lines.length === 0) return -1
+  gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+  if (gMeme.selectedLineIdx === 0 && gMeme.lines.length > 0) return gMeme.selectedLineIdx = gMeme.lines.length - 1;
+  if (gMeme.selectedLineIdx > 0) return gMeme.selectedLineIdx--;
+
 }

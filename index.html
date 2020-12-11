@@ -7,13 +7,14 @@
   <title>Meme Generator</title>
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
 <body onload="init()">
   <header class="header-container">
 
     <div class="header-content flex space-between">
-      <div class="logo"><img src="images/LOGO.png"></div>
+      <div class="logo"><img src="images/LOGO.png" onclick="logoBounce()"></div>
       <ul class="clean-list flex">
         <li>
           <a href="#" onclick="openGallery()">Gallery</a>
@@ -30,7 +31,8 @@
     <div class="main-container">
       <div class="working-space space-between">
         <div class="canvas-container">
-          <canvas id="my-canvas" height="400" width="400" onclick="pressCanvas(event)"
+          <!-- onclick="pressCanvas(event)" -->
+          <canvas id="my-canvas" height="400" width="400" onmousedown="pressLine(event)"
             onmouseup="keepPosition(event)"></canvas>
         </div>
         <div class="controller-content flex space-between">
