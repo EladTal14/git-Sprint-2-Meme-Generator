@@ -168,3 +168,16 @@ function changeLines() {
     gMeme.selectedLineIdx += num
   }
 }
+
+function clickedOnLine(lineClicked) {
+  gMeme.selectedLineIdx = gMeme.lines.findIndex(line => {
+    return line.position.x === lineClicked.position.x && line.position.y === lineClicked.position.y
+  })
+}
+
+function removeLine() {
+
+  gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+  if (!gMeme.selectedLineIdx) return gMeme.selectedLineIdx = 0
+  gMeme.selectedLineIdx--
+}

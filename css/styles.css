@@ -104,8 +104,15 @@ input[name="filter"] {
   display: none
 }
 
+.canvas-container {
+  margin: 30px;
+  margin-left: 30px;
+}
+
 canvas {
   background-color: rgb(180, 106, 106);
+
+
 }
 
 .controller-content {

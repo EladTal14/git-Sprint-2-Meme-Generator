@@ -92,13 +92,10 @@ function wrapText(text, x, y, fontSize, fontColor, txtAlign, lineHeight = 20) {
   var y = y;
   var line = '';
   var words = text.split(' ');
-
   for (var n = 0; n < words.length; n++) {
     var testLine = line + ' ' + words[n];
     var metrics = gCtx.measureText(testLine);
-    // console.log(metrics);
     var testWidth = metrics.width;
-
     if (testWidth > gCanvas.width - 30) {
       lines.push(line);
       line = words[n] + ' ';
@@ -107,7 +104,6 @@ function wrapText(text, x, y, fontSize, fontColor, txtAlign, lineHeight = 20) {
     }
   }
   lines.push(line);
-  // console.log(lines);
   for (var k in lines) {
     gCtx.strokeText(lines[k], x, y + lineHeight * k);
     gCtx.fillText(lines[k], x, y + lineHeight * k);
@@ -118,6 +114,8 @@ function addLine() {
   var text = document.querySelector('.text').value
   addMemeLine(text, getFontSize(), gCtx.textAlign, gCtx.strokeStyle)
   document.querySelector('.text').value = ''
+  var meme = getMeme()
+  focusLine(meme.lines[meme.lines.length - 1])
 }
 
 // to util
@@ -161,7 +159,7 @@ function changeFontFamily(val) {
 
 function changeAlign(val) {
   gCtx.textAlign = `${val}`;
-  drawMeme()
+  drawMeme();
 }
 
 function resetGctx() {
@@ -173,7 +171,7 @@ function resetGctx() {
   gCtx.textBaseline = 'top';
   gCtx.strokeStyle = 'black';
   gCtx.textBaseline = 'top';
-  _createMeme()
+  _createMeme();
 }
 
 
@@ -181,12 +179,65 @@ function pressCanvas(ev) {
   var {
     offsetX,
     offsetY
-  } = ev
-  console.log(offsetX, offsetY);
+  } = ev;
+  var meme = getMeme();
+  var clickedLine = meme.lines.find(line => {
+    var text = line.txt;
+    var lineHeight = line.size;
+    var lineWidth = gCtx.measureText(text).width;
+    return offsetX >= line.position.x - (lineWidth / 2) - 2 && offsetX <= line.position.x + (lineWidth / 2) + 2 &&
+      offsetY >= line.position.y - (lineHeight * 0.1) && offsetY <= line.position.y + (lineHeight)
+  })
+  if (clickedLine) {
+    focusLine(clickedLine);
+    gCanvas.addEventListener('mousemove', function drag(event) {
+      console.log(event);
+    })
+    // gCanvas.removeEventListener('mousemove', drag, false)
+  } else {
+    drawMeme()
+  }
 }
 
 function onChangeLines() {
-  changeLines()
-  document.querySelector('.text').value = '';
+  changeLines();
+  var meme = getMeme();
+  document.querySelector('.text').value = meme.lines[meme.selectedLineIdx].txt.toLowerCase();
+}
 
+function focusLine(clickedLine) {
+  drawMeme();
+  gCtx.beginPath();
+  gCtx.strokeStyle = 'black';
+  gCtx.rect(clickedLine.position.x - (gCtx.measureText(clickedLine.txt).width / 2) - (clickedLine.size / 2), clickedLine.position.y - (clickedLine.size / 2), gCtx.measureText(clickedLine.txt).width * 1.2 + 15, clickedLine.size * 1.2 + 15);
+  gCtx.stroke();
+  clickedOnLine(clickedLine);
+  document.querySelector('.text').value = clickedLine.txt.toLowerCase();
+}
+
+function onRemoveLine() {
+  removeLine();
+  gCtx.beginPath();
+  var meme = getMeme();
+  gCtx.strokeStyle = 'black';
+  gCtx.rect(meme.lines[meme.selectedLineIdx].position.x - (gCtx.measureText(meme.lines[meme.selectedLineIdx].txt).width / 2) - (meme.lines[meme.selectedLineIdx].size / 2), meme.lines[meme.selectedLineIdx].position.y - (meme.lines[meme.selectedLineIdx].size / 2), gCtx.measureText(meme.lines[meme.selectedLineIdx].txt).width * 1.2 + 15, meme.lines[meme.selectedLineIdx].size * 1.2 + 15);
+  gCtx.stroke();
+  document.querySelector('.text').value = meme.lines[meme.selectedLineIdx].txt.toLowerCase();
+  drawMeme();
+}
+
+function dragLine(ev) {
+  var {
+    offsetX,
+    offsetY
+  } = ev;
+  console.log(offsetX, offsetY);
+}
+
+function keepPosition(ev) {
+  var {
+    offsetX,
+    offsetY
+  } = ev;
+  console.log(1);
 }
