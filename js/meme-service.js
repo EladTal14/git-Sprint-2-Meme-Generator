@@ -7,7 +7,7 @@ function _createKeywords() {
     'funny': 1,
     'sad': 10,
     'men': 6,
-    'women': 7
+    'awesome': 7
   }
 }
 var gImgs = [{
@@ -17,15 +17,15 @@ var gImgs = [{
 }, {
   id: 2,
   url: 'images/2.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 3,
   url: 'images/3.jpg',
-  keywords: ['happy', 'funny', 'man']
+  keywords: ['happy', 'funny', 'men']
 }, {
   id: 4,
   url: 'images/4.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 5,
   url: 'images/5.jpg',
@@ -33,31 +33,31 @@ var gImgs = [{
 }, {
   id: 6,
   url: 'images/6.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 7,
   url: 'images/7.jpg',
-  keywords: ['happy', 'funny', 'man']
+  keywords: ['happy', 'funny', 'men']
 }, {
   id: 8,
   url: 'images/8.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 9,
   url: 'images/9.jpg',
-  keywords: ['happy', 'funny', 'man']
+  keywords: ['happy', 'funny', 'men']
 }, {
   id: 10,
   url: 'images/10.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 11,
   url: 'images/11.jpg',
-  keywords: ['happy', 'funny', 'man']
+  keywords: ['happy', 'funny', 'men']
 }, {
   id: 12,
   url: 'images/12.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 13,
   url: 'images/13.jpg',
@@ -65,15 +65,15 @@ var gImgs = [{
 }, {
   id: 14,
   url: 'images/14.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }, {
   id: 15,
   url: 'images/15.jpg',
-  keywords: ['happy', 'funny', 'man']
+  keywords: ['happy', 'funny', 'men']
 }, {
   id: 16,
   url: 'images/16.jpg',
-  keywords: ['alone', 'sad']
+  keywords: ['awesome', 'sad']
 }];
 
 var gMeme;
@@ -117,7 +117,7 @@ function setFilter(filterBy) {
     return gKeywords
   }
   gFilterBy = filterBy.toLowerCase();
-  Object.keys(gKeywords).forEach((word, idx) => {
+  Object.keys(gKeywords).forEach(word => {
     if (word === gFilterBy) {
       gKeywords[word]++;
     }

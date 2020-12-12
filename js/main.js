@@ -273,3 +273,21 @@ function downloadImg(elLink) {
   var imgContent = gCanvas.toDataURL('image/jpeg');
   elLink.href = imgContent
 }
+
+function openModal() {
+  var elModal = document.querySelector(".modal");
+  elModal.style.display = "block";
+}
+
+function closeModal() {
+  var elModal = document.querySelector(".modal");
+  elModal.style.display = "none";
+
+}
+
+window.onclick = function (event) {
+  var elModal = document.querySelector(".modal");
+  if (event.target == elModal) {
+    elModal.style.display = "none";
+  }
+}

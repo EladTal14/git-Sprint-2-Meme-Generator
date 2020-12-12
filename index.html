@@ -21,7 +21,7 @@
             <a class="gallery-btn" onclick="openGallery() ,toggleMenu()">Gallery</a>
           </li>
           <li>
-            <a onclick="toggleMenu()">About</a>
+            <a class="modal-btn" onclick="toggleMenu(),openModal()">About</a>
           </li>
         </ul>
         <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">☰</button>
@@ -35,7 +35,7 @@
     <div class="main-container">
       <div class="working-space space-between">
         <div class="canvas-container">
-          <canvas id="my-canvas" height="400" width="400" onmousedown="pressLine(event)" ontouchmove="pressLine(event)"
+          <canvas id="my-canvas" height="400" width="370" onmousedown="pressLine(event)" ontouchmove="pressLine(event)"
             ontouchend="keepPosition(event)" onmouseup="keepPosition(event)"></canvas>
         </div>
         <div class="controller-content flex space-around">
@@ -62,7 +62,8 @@
 
             <button>S</button>
             <button type="color"><img src="icons/paint-board-and-brush.png" alt="" /><input type="color" value="#ffffff"
-                onchange="changeColor(this.value)"></div>
+                onchange="changeColor(this.value)"></button>
+          </div>
           <div class="choose-stickers">
             <button>hap-face</button>
             <button>sad-face</button>
@@ -100,8 +101,8 @@
               <li><a onclick="onSetFilter(this.text)">Funny</a></li>
               <li><a onclick="onSetFilter(this.text)">Men</a></li>
               <li><a onclick="onSetFilter(this.text)">Sad</a></li>
-              <li><a onclick="onSetFilter(this.text)">Women</a></li>
               <li><a onclick="onSetFilter(this.text)">Happy</a></li>
+              <li><a onclick="onSetFilter(this.text)">Awesome</a></li>
           </div>
           <button class="more-keys">more</button>
         </div>
@@ -114,6 +115,26 @@
     </div>
     </div>
   </main>
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Meme Generator</h2>
+      </div>
+      <div class="modal-body">
+        <p>Enjoy the generator</p>
+        <p>Please donate to Bibi trial</p>
+      </div>
+      <div class="modal-footer">
+        <div class="social-buttons flex">
+          <button class="foot-btn fc-btn"><img src="icons/facebook.png" alt=""></button>
+          <button class="foot-btn tw-btn"><img src="icons/twitter.png" alt=""></button>
+          <button class="foot-btn be-btn"><img src="icons/Be.png" alt=""></button>
+          <button class="foot-btn bs-btn"><img src="icons/github-logo.png" alt="www"></button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="js/upload-service.js"></script>
   <script src="js/meme-service.js"></script>
   <script src="js/main.js"></script>
