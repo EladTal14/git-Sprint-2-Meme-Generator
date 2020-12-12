@@ -1,13 +1,19 @@
 'use strict'
-var gKeywords = {
-  'happy': 12,
-  'funny': 1
-}
+var gKeywords
 
+function _createKeywords() {
+  gKeywords = {
+    'happy': 12,
+    'funny': 1,
+    'sad': 10,
+    'men': 6,
+    'women': 7
+  }
+}
 var gImgs = [{
   id: 1,
   url: 'images/1.jpg',
-  keywords: ['happy', 'funny', 'man']
+  keywords: ['happy', 'funny', 'men']
 }, {
   id: 2,
   url: 'images/2.jpg',
@@ -71,6 +77,7 @@ var gImgs = [{
 }];
 
 var gMeme;
+var gFilterBy;
 
 function _createMeme() {
   var canvas = getCanvas()
@@ -94,7 +101,7 @@ function updateTxtMeme(text) {
 function getMeme() {
   return gMeme;
 }
-var gFilterBy;
+
 
 function getImg(idx) {
   var choosenImg = gImgs.find(img => {
@@ -105,7 +112,17 @@ function getImg(idx) {
 };
 
 function setFilter(filterBy) {
-  gFilterBy = filterBy;
+  if (!filterBy) {
+    gFilterBy = ''
+    return gKeywords
+  }
+  gFilterBy = filterBy.toLowerCase();
+  Object.keys(gKeywords).forEach((word, idx) => {
+    if (word === gFilterBy) {
+      gKeywords[word]++;
+    }
+  });
+  return gKeywords
 };
 
 function getImgsforDisplay() {

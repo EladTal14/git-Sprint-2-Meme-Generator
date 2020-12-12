@@ -15,7 +15,7 @@
 
     <div class="header-content flex space-between">
       <div class="logo"><img src="images/LOGO.png" onclick="logoBounce()"></div>
-      <ul class="clean-list flex">
+      <ul class="header-list clean-list flex">
         <li>
           <a href="#" onclick="openGallery()">Gallery</a>
         </li>
@@ -38,7 +38,6 @@
         <div class="controller-content flex space-between">
 
           <input type="text" placeholder="Enter Text" value="" class="text">
-          <!-- oninput="drawText(this.value)" -->
           <div class="line-buttons">
             <button onclick="onChangeLines()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
                 alt="" /></button>
@@ -61,39 +60,40 @@
             <button>S</button>
             <button type="color"><img src="icons/paint-board-and-brush.png" alt="" /><input type="color" value="#ffffff"
                 onchange="changeColor(this.value)"></div>
-
           <div class="choose-stickers">
             <button>hap-face</button>
             <button>sad-face</button>
           </div>
-
           <div class="actions">
             <button>Share</button>
             <button>Download</button>
           </div>
         </div>
-
-
       </div>
     </div>
 
     <div class="gallery">
       <nav>
-        <input list="filters" name="filter" oninput="onSetFilter(this.value)" id="filter" placeholder="Search"
-          autofocus>
-        <datalist id="filters">
-          <option value="sad">
-          <option value="happy">
-          <option value="funny">
-          <option value="angry">
-          <option value="smart">
-        </datalist>
-        <div class="key-words">
-          <button>Funny</button>
-          <button>Men</button>
-          <button>Women</button>
+        <div class="search-line flex space-around">
+          <input type="text" list="filters" name="filter" oninput="onSetFilter(this.value)" id="filter"
+            placeholder="Search" autofocus>
+          <datalist id="filters">
+            <option value="sad">
+            <option value="happy">
+            <option value="funny">
+            <option value="angry">
+            <option value="smart">
+          </datalist>
+          <div class="key-words">
+            <ul class="ul-words clean-list flex space-between">
+              <li><a onclick="onSetFilter(this.text)">Funny</a></li>
+              <li><a onclick="onSetFilter(this.text)">Men</a></li>
+              <li><a onclick="onSetFilter(this.text)">Sad</a></li>
+              <li><a onclick="onSetFilter(this.text)">Women</a></li>
+              <li><a onclick="onSetFilter(this.text)">Happy</a></li>
+          </div>
+          <button class="more-keys">more</button>
         </div>
-        <button>more</button>
         <div class="gallery-container">
           <div class="gallery-main grid">
           </div>

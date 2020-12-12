@@ -6,6 +6,7 @@ var gImg
 function init() {
   gCanvas = document.querySelector('#my-canvas');
   gCtx = gCanvas.getContext('2d');
+  _createKeywords()
   onSetFilter();
   addEventsToInput();
   resetGctx();
@@ -17,7 +18,13 @@ function getCanvas() {
 }
 
 function onSetFilter(filterBy) {
-  setFilter(filterBy);
+
+  var keywords = setFilter(filterBy);
+  console.log(keywords);
+  var elAInList = document.querySelectorAll('.ul-words li a')
+  elAInList.forEach(elA => {
+    if (+keywords[elA.text.toLowerCase()] < 15) elA.style.fontSize = `${+keywords[elA.text.toLowerCase()]+20}px`
+  })
   renderPictures();
 }
 
@@ -199,29 +206,6 @@ function pressLine(ev) {
   }
 }
 
-function pressCanvas(ev) {
-  // var {
-  //   offsetX,
-  //   offsetY
-  // } = ev;
-  // var meme = getMeme();
-  // var clickedLine = meme.lines.find(line => {
-  //   var text = line.txt;
-  //   var lineHeight = line.size;
-  //   var lineWidth = gCtx.measureText(text).width;
-  //   return offsetX >= line.position.x - (lineWidth / 2) - 2 && offsetX <= line.position.x + (lineWidth / 2) + 2 &&
-  //     offsetY >= line.position.y - (lineHeight * 0.1) && offsetY <= line.position.y + (lineHeight)
-  // })
-  // if (clickedLine) {
-  //   focusLine(clickedLine);
-  //   gCanvas.addEventListener('mousemove', function drag(event) {
-  //     console.log(event);
-  //   })
-  //   // gCanvas.removeEventListener('mousemove', drag, false)
-  // } else {
-  //   drawMeme()
-  // }
-}
 
 function onChangeLines() {
   changeLines();
