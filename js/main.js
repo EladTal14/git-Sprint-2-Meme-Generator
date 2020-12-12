@@ -11,6 +11,7 @@ function init() {
   addEventsToInput();
   resetGctx();
   _createMeme();
+  document.querySelector('.gallery-btn').classList.add('gallery-on')
 }
 
 function toggleMenu() {
@@ -46,6 +47,8 @@ function openGallery() {
   workSpace.classList.remove('flex');
   var gallery = document.querySelector('.gallery');
   gallery.hidden = false;
+  var elGalleryBtn = document.querySelector('.gallery-btn')
+  if (!gallery.hidden) elGalleryBtn.classList.add('gallery-on')
   renderPictures();
   resetGctx();
 }
@@ -55,6 +58,8 @@ function openWorkSpace() {
   workSpace.classList.add('flex');
   var gallery = document.querySelector('.gallery');
   gallery.hidden = true;
+  var elGalleryBtn = document.querySelector('.gallery-btn')
+  elGalleryBtn.classList.remove('gallery-on')
 }
 
 
@@ -196,6 +201,13 @@ function pressLine(ev) {
   })
   if (clickedLine) {
     focusLine(clickedLine);
+    gCanvas.addEventListener('touchmove', gCanvas.dragT = function dragT(event) {
+      event.preventDefault()
+      clickedLine.position.x = event.offsetX;
+      clickedLine.position.y = event.offsetY;
+      drawMeme()
+    }, false)
+
     gCanvas.addEventListener('mousemove', gCanvas.drag = function drag(event) {
       clickedLine.position.x = event.offsetX;
       clickedLine.position.y = event.offsetY;
@@ -246,6 +258,7 @@ function keepPosition(ev) {
     offsetY
   } = ev;
   gCanvas.removeEventListener('mousemove', gCanvas.drag, false);
+  gCanvas.removeEventListener('touchmove', gCanvas.dragT, false);
 }
 
 function logoBounce() {
@@ -254,4 +267,9 @@ function logoBounce() {
   setTimeout(() => {
     logo.classList.remove('animate__animated', 'animate__bounce')
   }, 2000);
+}
+
+function downloadImg(elLink) {
+  var imgContent = gCanvas.toDataURL('image/jpeg');
+  elLink.href = imgContent
 }

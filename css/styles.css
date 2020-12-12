@@ -58,7 +58,6 @@ input[type="text"] {
 .logo {
   margin-left: 123px;
   line-height: 82px;
-
 }
 
 .logo img {
@@ -82,17 +81,6 @@ input[type="text"] {
     margin-left: 63px;
   }
 }
-
-/* .main-menu a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-  line-height: 130px;
-  height: 130px;
-  width: 8.4375rem;
-  text-align: center;
-  border-right: 1px solid #1e1e1e;
-} */
 
 /* MAIN */
 
@@ -165,7 +153,6 @@ input[name="filter"] {
 
 .more-keys {
   width: 92px;
-  /* height: 36px; */
   box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.15);
   background-color: #fefefe;
   background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
@@ -173,6 +160,10 @@ input[name="filter"] {
   font-family: Poppins;
   font-size: 18px;
   color: #fefefe;
+}
+
+.gallery-on {
+  background-color: red;
 }
 
 /* Working Space */
@@ -189,15 +180,23 @@ input[name="filter"] {
 canvas {
   background-color: rgb(180, 106, 106);
   border: 5px solid black;
+  box-shadow: 1px 1px 7px 7px #999;
 }
 
 .controller-content {
   flex-direction: column;
   margin-right: 20px;
-  margin: 0 auto;
   background-color: rgb(116, 107, 107);
   border-radius: 20px;
-  padding: 20px;
+  padding: 30px;
+  box-shadow: 1px 1px 7px 7px #999;
+  max-width: 520px;
+}
+
+@media (min-width:880px) {
+  .controller-content {
+    margin: 0 auto;
+  }
 }
 
 .controller-content input {
@@ -205,6 +204,8 @@ canvas {
   margin: 0 auto;
   height: 10%;
   border-radius: 20px;
+  background-color: #ebeef3;
+  box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
 }
 
 button img {
@@ -224,8 +225,8 @@ button img {
 }
 
 .change-apperance-buttons {
-  background-color: rgb(79, 214, 185);
-  grid-template-columns: repeat(5, 1fr);
+  background-color: #19a59f;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
   border-radius: 10px;
   padding: 5px;
 }
@@ -251,12 +252,11 @@ button:active {
   }
 
   .controller-content {
-    margin-right: 20px;
+    margin-left: 20px;
   }
 
   .search-line {
     flex-direction: column;
-
   }
 
   .logo {
@@ -330,7 +330,7 @@ button:active {
 
 
 /* HAMBURGER MENU */
-@media (max-width: 740px) {
+@media (max-width: 840px) {
   .main-menu {
     flex-direction: column;
     position: fixed;
@@ -369,11 +369,6 @@ button:active {
 }
 
 @media (max-width: 740px) {
-  .toggle-menu-screen {
-    display: block;
-  }
-
-
   .open .toggle-menu-screen {
     visibility: visible;
     opacity: 1;
@@ -390,7 +385,7 @@ button:active {
   display: none;
 }
 
-@media (max-width: 740px) {
+@media (max-width: 830px) {
   .toggle-menu-btn {
     display: block;
   }

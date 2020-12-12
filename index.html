@@ -18,7 +18,7 @@
       <nav id="mainMenu" class="main-menu-wrapper">
         <ul class="header-list main-menu clean-list flex">
           <li>
-            <a onclick="openGallery() ,toggleMenu()">Gallery</a>
+            <a class="gallery-btn" onclick="openGallery() ,toggleMenu()">Gallery</a>
           </li>
           <li>
             <a onclick="toggleMenu()">About</a>
@@ -35,11 +35,10 @@
     <div class="main-container">
       <div class="working-space space-between">
         <div class="canvas-container">
-          <!-- onclick="pressCanvas(event)" -->
-          <canvas id="my-canvas" height="400" width="400" onmousedown="pressLine(event)"
-            onmouseup="keepPosition(event)"></canvas>
+          <canvas id="my-canvas" height="400" width="400" onmousedown="pressLine(event)" ontouchmove="pressLine(event)"
+            ontouchend="keepPosition(event)" onmouseup="keepPosition(event)"></canvas>
         </div>
-        <div class="controller-content flex space-between">
+        <div class="controller-content flex space-around">
 
           <input type="text" placeholder="Enter Text" value="" class="text">
           <div class="line-buttons">
@@ -69,8 +68,16 @@
             <button>sad-face</button>
           </div>
           <div class="actions">
-            <button>Share</button>
-            <button>Download</button>
+            <form class="flex" action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+              <input name="img" id="imgData" type="hidden" />
+              <button class="btn" type="submit">Publish</button>
+              <button><a href="#" type="btn" onclick="downloadImg(this)" download="my-img.jpg"><img
+                    src="icons/download.png" alt="" />Download</a></button>
+              <div class="share-container"></div>
+            </form>
+
+
+
           </div>
         </div>
       </div>
@@ -107,7 +114,7 @@
     </div>
     </div>
   </main>
-
+  <script src="js/upload-service.js"></script>
   <script src="js/meme-service.js"></script>
   <script src="js/main.js"></script>
 </body>
