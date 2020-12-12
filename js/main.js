@@ -1,16 +1,22 @@
 'use strict'
 var gCanvas;
 var gCtx;
-var gImg
+var gImg;
 
 function init() {
   gCanvas = document.querySelector('#my-canvas');
   gCtx = gCanvas.getContext('2d');
-  _createKeywords()
+  _createKeywords();
   onSetFilter();
   addEventsToInput();
   resetGctx();
   _createMeme();
+}
+
+function toggleMenu() {
+  if (window.innerWidth > 800) return
+  var mainMenu = document.getElementById('mainMenu');
+  mainMenu.classList.toggle('open');
 }
 
 function getCanvas() {
@@ -18,10 +24,8 @@ function getCanvas() {
 }
 
 function onSetFilter(filterBy) {
-
   var keywords = setFilter(filterBy);
-  console.log(keywords);
-  var elAInList = document.querySelectorAll('.ul-words li a')
+  var elAInList = document.querySelectorAll('.ul-words li a');
   elAInList.forEach(elA => {
     if (+keywords[elA.text.toLowerCase()] < 15) elA.style.fontSize = `${+keywords[elA.text.toLowerCase()]+20}px`
   })
@@ -57,36 +61,33 @@ function openWorkSpace() {
 function drawImg(id) {
   openWorkSpace();
   var text = document.querySelector('.text');
-  text.value = ''
+  text.value = '';
   var imgFromBack = getImg(id);
   var img = new Image();
   img.src = imgFromBack.url;
-  gImg = img
+  gImg = img;
   gImg.onload = () => {
-    drawMeme()
+    drawMeme();
   }
 
 }
 
 function addEventsToInput() {
-  var text = document.querySelector('.text')
-  text.addEventListener('keydown', drawMeme)
-  text.addEventListener('keyup', drawMeme)
-  text.addEventListener('change', drawMeme)
+  var text = document.querySelector('.text');
+  text.addEventListener('keydown', drawMeme);
+  text.addEventListener('keyup', drawMeme);
+  text.addEventListener('change', drawMeme);
 }
 
 
 function drawMeme() {
-
   gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
   gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height);
-
   var text = document.querySelector('.text').value;
   text = text.toUpperCase();
   changeLineProp(text, getFontSize(), gCtx.textAlign, gCtx.fillStyle);
-  var meme = getMeme()
+  var meme = getMeme();
   for (var line in meme.lines) {
-    // console.log(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size);
     wrapText(meme.lines[line].txt, meme.lines[line].position.x, meme.lines[line].position.y, meme.lines[line].size, meme.lines[line].color, meme.lines[line].align);
   }
 }
@@ -96,7 +97,6 @@ function wrapText(text, x, y, fontSize, fontColor, txtAlign, lineHeight = 20) {
   gCtx.fillStyle = fontColor
   gCtx.textAlign = txtAlign
   var lines = [];
-  var y = y;
   var line = '';
   var words = text.split(' ');
   for (var n = 0; n < words.length; n++) {

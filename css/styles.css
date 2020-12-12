@@ -29,6 +29,15 @@ input[type="text"] {
   font-family: Poppins;
 }
 
+.fa {
+  display: inline-block;
+  font-family: fontawesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* LAYOUT */
 .main-layout {
   max-width: 1280px;
@@ -58,11 +67,32 @@ input[type="text"] {
 
 }
 
-.header-list li:last-child {
-  margin-right: 247px;
-  margin-left: 63px;
+.header-list li a {
+  width: 74px;
+  height: 22px;
+  color: white;
+  font-family: Poppins;
+  font-size: 21px;
+  font-weight: 500;
 }
 
+@media(min-width:720px) {
+  .header-list li:last-child {
+    margin-right: 247px;
+    margin-left: 63px;
+  }
+}
+
+/* .main-menu a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  line-height: 130px;
+  height: 130px;
+  width: 8.4375rem;
+  text-align: center;
+  border-right: 1px solid #1e1e1e;
+} */
 
 /* MAIN */
 
@@ -211,9 +241,9 @@ button:active {
   transform: translateY(4px);
 }
 
-@media (max-width:760px) {
+@media (max-width:880px) {
   .main-layout {
-    max-width: 720px;
+    max-width: 860px;
   }
 
   .working-space {
@@ -231,7 +261,21 @@ button:active {
 
   .logo {
     margin: 0 auto;
+  }
 
+  .ul-words {
+    flex-wrap: wrap;
+  }
+
+  #filter,
+  .key-words {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 90%;
+  }
+
+  .more-keys {
+    margin: 0 auto;
   }
 }
 
@@ -282,4 +326,72 @@ button:active {
   background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
   border-radius: 20px;
   /* outline: 1px solid slategrey; */
+}
+
+
+/* HAMBURGER MENU */
+@media (max-width: 740px) {
+  .main-menu {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 300;
+    background: #292929;
+    height: 100vh;
+    transition: transform 1s;
+    transform: translate(100%, 0);
+    width: 30%;
+  }
+
+  .open .main-menu {
+    transform: translate(0, 0);
+  }
+
+  .main-menu a.active {
+    border-width: 1px;
+  }
+}
+
+.toggle-menu-screen {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(42, 42, 42, 0.6);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: opacity .5s;
+}
+
+@media (max-width: 740px) {
+  .toggle-menu-screen {
+    display: block;
+  }
+
+
+  .open .toggle-menu-screen {
+    visibility: visible;
+    opacity: 1;
+  }
+
+}
+
+.toggle-menu-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.75rem;
+  padding: 20px;
+  display: none;
+}
+
+@media (max-width: 740px) {
+  .toggle-menu-btn {
+    display: block;
+  }
 }

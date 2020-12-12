@@ -15,14 +15,18 @@
 
     <div class="header-content flex space-between">
       <div class="logo"><img src="images/LOGO.png" onclick="logoBounce()"></div>
-      <ul class="header-list clean-list flex">
-        <li>
-          <a href="#" onclick="openGallery()">Gallery</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-      </ul>
+      <nav id="mainMenu" class="main-menu-wrapper">
+        <ul class="header-list main-menu clean-list flex">
+          <li>
+            <a onclick="openGallery() ,toggleMenu()">Gallery</a>
+          </li>
+          <li>
+            <a onclick="toggleMenu()">About</a>
+          </li>
+        </ul>
+        <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">☰</button>
+        <div class="toggle-menu-screen screen" onclick="toggleMenu()" alt="toggle main menu"></div>
+      </nav>
     </div>
 
   </header>
