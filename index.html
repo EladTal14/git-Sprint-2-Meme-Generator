@@ -64,17 +64,19 @@
             <button type="color"><img src="icons/paint-board-and-brush.png" alt="" /><input type="color" value="#ffffff"
                 onchange="changeColor(this.value)"></button>
           </div>
-          <div class="choose-stickers">
+          <!-- <div class="choose-stickers flex space-around">
             <button>hap-face</button>
             <button>sad-face</button>
-          </div>
+          </div> -->
           <div class="actions">
-            <form class="flex" action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+            <form class="flex space-around" action="" method="POST" enctype="multipart/form-data"
+              onsubmit="uploadImg(this, event)">
               <input name="img" id="imgData" type="hidden" />
               <button class="btn" type="submit">Publish</button>
+
+              <div class="share-container"></div>
               <button><a href="#" type="btn" onclick="downloadImg(this)" download="my-img.jpg"><img
                     src="icons/download.png" alt="" />Download</a></button>
-              <div class="share-container"></div>
             </form>
           </div>
         </div>

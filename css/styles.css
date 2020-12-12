@@ -235,6 +235,7 @@ button img {
   grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
   border-radius: 10px;
   padding: 5px;
+  margin-bottom: 8px;
 }
 
 .change-apperance-buttons button {
@@ -246,6 +247,10 @@ button:active {
   background-color: #3e8e41;
   box-shadow: 0 3px #666;
   transform: translateY(4px);
+}
+
+.choose-stickers {
+  margin-bottom: 8px;
 }
 
 @media (max-width:880px) {
