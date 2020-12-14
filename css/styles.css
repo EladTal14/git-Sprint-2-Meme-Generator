@@ -18,6 +18,14 @@ a {
   text-decoration: none;
 }
 
+button :focus {
+  outline: none !important;
+}
+
+input {
+  outline: none;
+}
+
 button,
 img,
 a {
@@ -75,7 +83,7 @@ input[type="text"] {
   font-weight: 500;
 }
 
-@media(min-width:720px) {
+@media(min-width:841px) {
   .header-list li:last-child {
     margin-right: 247px;
     margin-left: 63px;
@@ -174,7 +182,6 @@ input[name="filter"] {
 
 .canvas-container {
   margin: 30px;
-  margin-left: 30px;
 }
 
 canvas {
@@ -183,9 +190,15 @@ canvas {
   box-shadow: 1px 1px 7px 7px #999;
 }
 
+@media (min-width: 840px) {
+  canvas {
+    margin-right: 45px;
+  }
+}
+
 .controller-content {
   flex-direction: column;
-  margin-right: 20px;
+
   background-color: rgb(116, 107, 107);
   border-radius: 20px;
   padding: 30px;
@@ -193,7 +206,7 @@ canvas {
   max-width: 520px;
 }
 
-@media (min-width:880px) {
+@media (max-width:880px) {
   .controller-content {
     margin: 0 auto;
 
@@ -216,14 +229,12 @@ canvas {
 
 button img {
   height: 30px;
-
 }
 
 .line-buttons {
   margin: 0 auto;
   margin-top: 5px;
   margin-bottom: 5px;
-
 }
 
 .line-buttons button {
@@ -241,6 +252,24 @@ button img {
 .change-apperance-buttons button {
   margin: 10px;
   border-radius: 5px;
+}
+
+.hidden-input-color {
+  position: absolute;
+  height: 40px !important;
+  width: 55px !important;
+  margin: 10px !important;
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+
+.color-btn {
+  position: relative;
+  height: 40px !important;
+  width: 55px !important;
+  margin: 10px !important;
 }
 
 button:active {
@@ -318,6 +347,9 @@ button:active {
   flex-direction: column;
 }
 
+.center {
+  justify-content: center;
+}
 
 /* ANIMATIONS */
 .animate__animated.animate__bounce {
@@ -361,6 +393,7 @@ button:active {
   .main-menu a.active {
     border-width: 1px;
   }
+
 }
 
 .toggle-menu-screen {
@@ -391,8 +424,15 @@ button:active {
   border: none;
   color: #fff;
   font-size: 1.75rem;
-  padding: 20px;
+  margin-right: 20px;
+  line-height: 65px;
   display: none;
+}
+
+.toggle-menu-btn:active {
+  background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+  box-shadow: 0 2px #666;
+  transform: translateY(3px);
 }
 
 @media (max-width: 830px) {

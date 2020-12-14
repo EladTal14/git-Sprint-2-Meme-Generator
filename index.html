@@ -33,14 +33,15 @@
 
   <main>
     <div class="main-container">
-      <div class="working-space space-between">
+      <div class="working-space center">
+        <!-- section -->
         <div class="canvas-container">
           <canvas id="my-canvas" height="400" width="330" onmousedown="pressLine(event)" ontouchmove="pressLine(event)"
             ontouchend="keepPosition(event)" onmouseup="keepPosition(event)"></canvas>
         </div>
         <div class="controller-content flex space-around">
 
-          <input type="text" placeholder="Enter Text" value="" class="text">
+          <input type="text" placeholder="Enter Text" class="text">
           <div class="line-buttons">
             <button onclick="onChangeLines()"><img src="icons/up-and-down-opposite-double-arrows-side-by-side.png"
                 alt="" /></button>
@@ -61,8 +62,10 @@
             </select>
 
             <button>S</button>
-            <button type="color"><img src="icons/paint-board-and-brush.png" alt="" /><input type="color" value="#ffffff"
-                onchange="changeColor(this.value)"></button>
+            <div class="flex ">
+              <!-- add class ^ -->
+              <input type="color" value="#ffffff" class="hidden-input-color" onchange="changeColor(this.value)">
+              <button class="color-btn"><img src="icons/paint-board-and-brush.png" alt="" /></button></div>
           </div>
           <!-- <div class="choose-stickers flex space-around">
             <button>hap-face</button>
@@ -75,9 +78,12 @@
               <button class="btn" type="submit">Publish</button>
 
               <div class="share-container"></div>
-              <button><a href="#" type="btn" onclick="downloadImg(this)" download="my-img.jpg"><img
-                    src="icons/download.png" alt="" />Download</a></button>
             </form>
+            <div class="flex">
+              <button><img src="icons/download.png" alt="" />Download</button>
+              <a href="#" onclick="downloadImg(this)" download="my-img.jpg"></a>
+
+            </div>
           </div>
         </div>
       </div>

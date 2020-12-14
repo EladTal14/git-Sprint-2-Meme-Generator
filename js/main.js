@@ -6,12 +6,13 @@ var gImg;
 function init() {
   gCanvas = document.querySelector('#my-canvas');
   gCtx = gCanvas.getContext('2d');
-  _createKeywords();
+  createKeywords();
   onSetFilter();
   addEventsToInput();
   resetGctx();
-  _createMeme();
+  createMeme(gCanvas.width);
   document.querySelector('.gallery-btn').classList.add('gallery-on')
+
 }
 
 function toggleMenu() {
@@ -20,9 +21,7 @@ function toggleMenu() {
   mainMenu.classList.toggle('open');
 }
 
-function getCanvas() {
-  return gCanvas
-}
+
 
 function onSetFilter(filterBy) {
   var keywords = setFilter(filterBy);
@@ -38,8 +37,8 @@ function renderPictures() {
   var strHTMLs = images.map(img => {
     return `<img src="${img.url}" onclick="drawImg(${img.id})"/>`
   })
-  var gallery = document.querySelector('.gallery-main');
-  gallery.innerHTML = strHTMLs.join('');
+  var elGallery = document.querySelector('.gallery-main');
+  elGallery.innerHTML = strHTMLs.join('');
 }
 
 function openGallery() {
@@ -60,6 +59,8 @@ function openWorkSpace() {
   gallery.hidden = true;
   var elGalleryBtn = document.querySelector('.gallery-btn')
   elGalleryBtn.classList.remove('gallery-on')
+  createMeme(gCanvas.width);
+  document.querySelector('.text').value = 'Enter Text'
 }
 
 
@@ -79,14 +80,11 @@ function drawImg(id) {
 
 function addEventsToInput() {
   var text = document.querySelector('.text');
-  text.addEventListener('keydown', drawMeme);
-  text.addEventListener('keyup', drawMeme);
-  text.addEventListener('change', drawMeme);
+  text.addEventListener('input', drawMeme);
 }
 
 
 function drawMeme() {
-  gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
   gCtx.drawImage(gImg, 0, 0, gCanvas.width, gCanvas.height);
   var text = document.querySelector('.text').value;
   text = text.toUpperCase();
@@ -98,9 +96,9 @@ function drawMeme() {
 }
 
 function wrapText(text, x, y, fontSize, fontColor, txtAlign, lineHeight = 20) {
-  gCtx.font = `${fontSize}px impact`
-  gCtx.fillStyle = fontColor
-  gCtx.textAlign = txtAlign
+  gCtx.font = `${fontSize}px impact`;
+  gCtx.fillStyle = fontColor;
+  gCtx.textAlign = txtAlign;
   var lines = [];
   var line = '';
   var words = text.split(' ');
@@ -123,11 +121,12 @@ function wrapText(text, x, y, fontSize, fontColor, txtAlign, lineHeight = 20) {
 }
 
 function addLine() {
-  var text = document.querySelector('.text').value
-  addMemeLine(text, getFontSize(), gCtx.textAlign, gCtx.strokeStyle)
-  document.querySelector('.text').value = ''
-  var meme = getMeme()
-  focusLine(meme.lines[meme.lines.length - 1])
+  var elText = document.querySelector('.text');
+  addMemeLine(elText.value, getFontSize(), gCtx.textAlign, gCtx.strokeStyle, gCanvas.width, gCanvas.height);
+  document.querySelector('.text').value = 'Enter Text';
+  elText.focus()
+  var meme = getMeme();
+  focusLine(meme.lines[meme.lines.length - 1]);
 }
 
 // to util
@@ -146,6 +145,8 @@ function getFontFamily() {
 
 function changeColor(val) {
   gCtx.fillStyle = `${val}`
+  var elBtn = document.querySelector('.color-btn')
+  elBtn.style.backgroundColor = `${val}`
   drawMeme()
 }
 
@@ -183,7 +184,7 @@ function resetGctx() {
   gCtx.textBaseline = 'top';
   gCtx.strokeStyle = 'black';
   gCtx.textBaseline = 'top';
-  _createMeme();
+  createMeme();
 }
 
 function pressLine(ev) {
@@ -218,11 +219,11 @@ function pressLine(ev) {
   }
 }
 
-
 function onChangeLines() {
   changeLines();
   var meme = getMeme();
   document.querySelector('.text').value = meme.lines[meme.selectedLineIdx].txt.toLowerCase();
+  document.querySelector('.text').focus();
 }
 
 function focusLine(clickedLine) {
@@ -241,6 +242,8 @@ function onRemoveLine() {
     addLine()
     document.querySelector('.text').value = '';
   }
+  document.querySelector('.text').focus();
+
   var meme = getMeme();
   if (meme.lines.length === 0) return
   gCtx.beginPath();
@@ -286,8 +289,8 @@ function closeModal() {
 }
 
 window.onclick = function (event) {
-  var elModal = document.querySelector(".modal");
-  if (event.target == elModal) {
-    elModal.style.display = "none";
+  var elModal = document.querySelector('.modal');
+  if (event.target === elModal) {
+    elModal.style.display = 'none';
   }
 }

@@ -1,7 +1,7 @@
 'use strict'
 var gKeywords
 
-function _createKeywords() {
+function createKeywords() {
   gKeywords = {
     'happy': 12,
     'funny': 1,
@@ -79,14 +79,14 @@ var gImgs = [{
 var gMeme;
 var gFilterBy;
 
-function _createMeme() {
-  var canvas = getCanvas()
+function createMeme(canvasWidth) {
   gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [{
+      txt: 'Enter Text',
       position: {
-        x: canvas.width / 2,
+        x: canvasWidth / 2,
         y: 30
       }
     }]
@@ -131,11 +131,8 @@ function getImgsforDisplay() {
     return img.keywords.find(keyword => {
       return keyword.includes(gFilterBy)
     });
-
   });
-
   return images;
-
 }
 
 function changeLineProp(txt, size, align, color) {
@@ -148,8 +145,7 @@ function changeLineProp(txt, size, align, color) {
 }
 
 
-function addMemeLine(txt, size, align, color) {
-  var canvas = getCanvas()
+function addMemeLine(txt, size, align, color, canvasWidth, canvasHeight) {
   gMeme.selectedLineIdx = gMeme.lines.length
   if (gMeme.lines.length === 1) {
     gMeme.lines.push({
@@ -158,8 +154,8 @@ function addMemeLine(txt, size, align, color) {
       align,
       color,
       position: {
-        x: canvas.width / 2,
-        y: canvas.height - 50
+        x: canvasWidth / 2,
+        y: canvasHeight - 50
       }
     })
   } else {
@@ -169,8 +165,8 @@ function addMemeLine(txt, size, align, color) {
       align,
       color,
       position: {
-        x: canvas.width / 2,
-        y: canvas.height / 2
+        x: canvasWidth / 2,
+        y: canvasHeight / 2
       }
     })
   }
